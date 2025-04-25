@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyStudyLife - Priority Setting</title>
+    <title>MyStudyLife - Reminders & Alerts</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -36,7 +36,7 @@
             width: 80%;
             text-align: center;
         }
-        select, input, button {
+        input, button {
             width: 80%;
             padding: 10px;
             margin: 10px;
@@ -60,38 +60,36 @@
         <a href="schedules.html">Schedules</a>
         <a href="tasks.html">Task Tracking</a>
         <a href="timeblocking.html">Time Blocking</a>
-        <a href="reminders.html">Reminders & Alerts</a>
+        <a href="priority.html">Priority Setting</a>
         <a href="adjustments.html">Flexible Adjustments</a>
         <a href="login.html">Login</a>
     </nav>
 
     <div class="container">
         <div class="card">
-            <h2>Priority Setting</h2>
-            <input type="text" id="taskName" placeholder="Enter Task">
-            <select id="priorityLevel">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-            </select>
-            <button onclick="setPriority()">Set Priority</button>
-            <ul id="priorityList"></ul>
+            <h2>Reminders & Alerts</h2>
+            <input type="text" id="reminderText" placeholder="Enter Reminder">
+            <input type="datetime-local" id="reminderTime">
+            <button onclick="setReminder()">Set Reminder</button>
+            <ul id="reminderList"></ul>
         </div>
     </div>
 
     <script>
-        function setPriority() {
-            let taskName = document.getElementById("taskName").value;
-            let priorityLevel = document.getElementById("priorityLevel").value;
-            if (taskName.trim() === "") {
-                alert("Enter a task name");
+        function setReminder() {
+            let reminderText = document.getElementById("reminderText").value;
+            let reminderTime = document.getElementById("reminderTime").value;
+            if (reminderText.trim() === "" || reminderTime.trim() === "") {
+                alert("Please enter a reminder and time");
                 return;
             }
-            let list = document.getElementById("priorityList");
+            let list = document.getElementById("reminderList");
             let item = document.createElement("li");
-            item.textContent = `${taskName} - ${priorityLevel}`;
+            item.textContent = `Reminder: ${reminderText} at ${reminderTime}`;
             list.appendChild(item);
-            document.getElementById("taskName").value = "";
+            alert("Reminder set!");
+            document.getElementById("reminderText").value = "";
+            document.getElementById("reminderTime").value = "";
         }
     </script>
 </body>

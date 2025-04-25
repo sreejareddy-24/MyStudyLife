@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyStudyLife - Time Blocking</title>
+    <title>MyStudyLife - Task Tracking</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -60,11 +60,11 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .time-list {
+        .task-list {
             width: 80%;
             margin-top: 20px;
         }
-        .time-item {
+        .task-item {
             background: white;
             padding: 10px;
             margin: 5px;
@@ -81,20 +81,18 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="schedules.html">Schedules</a>
         <a href="tasks.html">Tasks</a>
-        <a href="timeblocking.html">Time Blocking</a>
+        <a href="reminders.html">Reminders</a>
         <a href="#" onclick="logout()">Logout</a>
     </nav>
 
     <div class="container">
         <div class="card">
-            <h2>Time Blocking</h2>
-            <input type="text" id="activity" placeholder="Enter Activity" required>
-            <input type="time" id="startTime" required>
-            <input type="time" id="endTime" required>
-            <button onclick="addTimeBlock()">Add Time Block</button>
+            <h2>Task Tracking</h2>
+            <input type="text" id="taskInput" placeholder="Enter Task" required>
+            <button onclick="addTask()">Add Task</button>
         </div>
-        <div class="card time-list" id="timeList">
-            <h2>Your Time Blocks</h2>
+        <div class="card task-list" id="taskList">
+            <h2>Your Tasks</h2>
         </div>
     </div>
 
@@ -103,26 +101,22 @@
             alert("Logging out...");
             window.location.href = "index.html";
         }
-        function addTimeBlock() {
-            let activity = document.getElementById("activity").value;
-            let startTime = document.getElementById("startTime").value;
-            let endTime = document.getElementById("endTime").value;
-            if (activity.trim() === "" || startTime.trim() === "" || endTime.trim() === "") {
-                alert("Please enter all details");
+        function addTask() {
+            let taskInput = document.getElementById("taskInput").value;
+            if (taskInput.trim() === "") {
+                alert("Please enter a task");
                 return;
             }
-            let timeList = document.getElementById("timeList");
-            let timeItem = document.createElement("div");
-            timeItem.classList.add("time-item");
-            timeItem.innerHTML = `<span>${activity}: ${startTime} - ${endTime}</span> <button onclick="removeTimeBlock(this)">Delete</button>`;
-            timeList.appendChild(timeItem);
-            document.getElementById("activity").value = "";
-            document.getElementById("startTime").value = "";
-            document.getElementById("endTime").value = "";
+            let taskList = document.getElementById("taskList");
+            let taskItem = document.createElement("div");
+            taskItem.classList.add("task-item");
+            taskItem.innerHTML = `<span>${taskInput}</span> <button onclick="removeTask(this)">Delete</button>`;
+            taskList.appendChild(taskItem);
+            document.getElementById("taskInput").value = "";
         }
-        function removeTimeBlock(button) {
+        function removeTask(button) {
             button.parentElement.remove();
         }
     </script>
 </body>
-</html>
+</html> 
