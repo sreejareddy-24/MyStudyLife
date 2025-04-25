@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyStudyLife - Time Blocking</title>
+    <title>MyStudyLife - Schedule</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -53,18 +53,18 @@
         button:hover {
             background-color: #0056b3;
         }
-        input {
+        input, select {
             width: 80%;
             padding: 10px;
             margin: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .time-list {
+        .schedule-list {
             width: 80%;
             margin-top: 20px;
         }
-        .time-item {
+        .schedule-item {
             background: white;
             padding: 10px;
             margin: 5px;
@@ -81,20 +81,19 @@
         <a href="dashboard.html">Dashboard</a>
         <a href="schedules.html">Schedules</a>
         <a href="tasks.html">Tasks</a>
-        <a href="timeblocking.html">Time Blocking</a>
+        <a href="reminders.html">Reminders</a>
         <a href="#" onclick="logout()">Logout</a>
     </nav>
 
     <div class="container">
         <div class="card">
-            <h2>Time Blocking</h2>
-            <input type="text" id="activity" placeholder="Enter Activity" required>
-            <input type="time" id="startTime" required>
-            <input type="time" id="endTime" required>
-            <button onclick="addTimeBlock()">Add Time Block</button>
+            <h2>Schedule Your Study Sessions</h2>
+            <input type="text" id="subject" placeholder="Enter Subject" required>
+            <input type="datetime-local" id="scheduleTime" required>
+            <button onclick="addSchedule()">Add Schedule</button>
         </div>
-        <div class="card time-list" id="timeList">
-            <h2>Your Time Blocks</h2>
+        <div class="card schedule-list" id="scheduleList">
+            <h2>Your Schedules</h2>
         </div>
     </div>
 
@@ -103,24 +102,22 @@
             alert("Logging out...");
             window.location.href = "index.html";
         }
-        function addTimeBlock() {
-            let activity = document.getElementById("activity").value;
-            let startTime = document.getElementById("startTime").value;
-            let endTime = document.getElementById("endTime").value;
-            if (activity.trim() === "" || startTime.trim() === "" || endTime.trim() === "") {
+        function addSchedule() {
+            let subject = document.getElementById("subject").value;
+            let scheduleTime = document.getElementById("scheduleTime").value;
+            if (subject.trim() === "" || scheduleTime.trim() === "") {
                 alert("Please enter all details");
                 return;
             }
-            let timeList = document.getElementById("timeList");
-            let timeItem = document.createElement("div");
-            timeItem.classList.add("time-item");
-            timeItem.innerHTML = `<span>${activity}: ${startTime} - ${endTime}</span> <button onclick="removeTimeBlock(this)">Delete</button>`;
-            timeList.appendChild(timeItem);
-            document.getElementById("activity").value = "";
-            document.getElementById("startTime").value = "";
-            document.getElementById("endTime").value = "";
+            let scheduleList = document.getElementById("scheduleList");
+            let scheduleItem = document.createElement("div");
+            scheduleItem.classList.add("schedule-item");
+            scheduleItem.innerHTML = `<span>${subject} - ${scheduleTime}</span> <button onclick="removeSchedule(this)">Delete</button>`;
+            scheduleList.appendChild(scheduleItem);
+            document.getElementById("subject").value = "";
+            document.getElementById("scheduleTime").value = "";
         }
-        function removeTimeBlock(button) {
+        function removeSchedule(button) {
             button.parentElement.remove();
         }
     </script>
